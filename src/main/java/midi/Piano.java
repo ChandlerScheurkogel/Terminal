@@ -33,7 +33,9 @@ channel.
 
         public Piano(MidiApp midiApp) {
         	this.midiApp = midiApp;
-        	
+
+//for some reason this does some stupid crap where it decides to sometimes reformat mid song - needs to be fixed still
+		
             setLayout(new BorderLayout());
             setPreferredSize(new Dimension(42*kw, kh+1));
             int transpose = 36;
@@ -43,11 +45,14 @@ channel.
                 for (int j = 0; j < 7; j++, x += kw) {
                     int keyNum = i * 12 + whiteIDs[j] + transpose;
                     whiteKeys.add(new Key(midiApp, x, 0, kw, kh, keyNum, false));
-                   /* if (j == 0) {
+                  
+			/* 
+			if (j == 0) {
 						Key C = (Key)whiteKeys.elementAt(whiteKeys.size()-1);
 						this.getGraphics().setColor(Color.black);
 						this.getGraphics().drawString(("c"+new Integer(i).toString()), x+2, 100);
 					}*/
+			
                 }
             }
             for (int i = 0, x = 0; i < 6; i++, x += kw) {
@@ -112,11 +117,15 @@ channel.
             }
         }
         public void mouseExited(MouseEvent e) {
-           /* if (prevKey != null) {
+		
+           /* 
+	   if (prevKey != null) {
                 prevKey.off();
                 repaint();
                 prevKey = null;
-            }*/
+            }
+	    */
+		
         }
         public void mouseClicked(MouseEvent e) { }
         public void mouseEntered(MouseEvent e) { }
@@ -143,6 +152,7 @@ channel.
 
 //if no stupid shit happens with things canceling out for retarded reasons this should make the keys turn pink
 //(it's actually more of a red) when they are being pressed
+		
             for (int i = 0; i < whiteKeys.size(); i++) {
                 Key key = (Key) whiteKeys.get(i);
                 if (key.isNoteOn()) {
@@ -158,6 +168,7 @@ hopefully the key doesn't stay pink because it doesn't know to refer to the if, 
 if it does then just make a stupidly-long if, else, and/or for statement that is all connected
 can't be bothered to fix it if it doesn't work - will just do the above
 */		
+		
             for (int i = 0; i < blackKeys.size(); i++) {
                 Key key = (Key) blackKeys.get(i);
                 if (key.isNoteOn()) {
@@ -172,4 +183,5 @@ can't be bothered to fix it if it doesn't work - will just do the above
             }
         }
     }
+
 // End class Piano
