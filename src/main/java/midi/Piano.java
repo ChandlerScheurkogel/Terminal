@@ -13,10 +13,11 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 
-   /**
-	 * Piano renders black & white keys and plays the notes for a MIDI
-     * channel.
-     */
+/*
+Piano renders black & white keys and plays the notes for a MIDI
+channel.
+*/
+
     class Piano extends JPanel implements MouseListener {
 
         Vector keys = new Vector();
@@ -60,7 +61,9 @@ import javax.swing.JPanel;
             }
             keys.addAll(blackKeys);
             keys.addAll(whiteKeys);
-
+		
+//listener used to prevent any stupid bullshit happening that is the equivalent of ghosting on a piano
+		
             addMouseMotionListener(new MouseMotionAdapter() {
                 public void mouseMoved(MouseEvent e) {
                     if (false) {
@@ -79,6 +82,8 @@ import javax.swing.JPanel;
             addMouseListener(this);
         }
 
+//simple check for if keys are pressed or not
+	    
         public void mousePressed(MouseEvent e) {
             prevKey = getKey(e.getPoint());
 
@@ -136,6 +141,8 @@ import javax.swing.JPanel;
             g2.setColor(Color.white);
             g2.fillRect(0, 0, 42*kw, kh);
 
+//if no stupid shit happens with things canceling out for retarded reasons this should make the keys turn pink
+//(it's actually more of a red) when they are being pressed
             for (int i = 0; i < whiteKeys.size(); i++) {
                 Key key = (Key) whiteKeys.get(i);
                 if (key.isNoteOn()) {
@@ -145,6 +152,12 @@ import javax.swing.JPanel;
                 g2.setColor(Color.black);
                 g2.draw(key);
             }
+		
+/*
+hopefully the key doesn't stay pink because it doesn't know to refer to the if, else, and/or for statements
+if it does then just make a stupidly-long if, else, and/or for statement that is all connected
+can't be bothered to fix it if it doesn't work - will just do the above
+*/		
             for (int i = 0; i < blackKeys.size(); i++) {
                 Key key = (Key) blackKeys.get(i);
                 if (key.isNoteOn()) {
@@ -158,4 +171,5 @@ import javax.swing.JPanel;
                 }
             }
         }
-    } // End class Piano
+    }
+// End class Piano
